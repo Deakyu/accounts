@@ -1,0 +1,98 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+nav,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+.nav {
+  background: #eee;
+  height: 50px;
+}
+
+.nav li {
+  height: 50px;
+}
+
+.nav__home {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 9px 18px;
+}
+
+.container {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.container__left,
+.container__center,
+.container__right {
+  display: block;
+  float: left;
+}
+
+.container__left,
+.container__right {
+  width: 15%;
+}
+
+.container__center {
+  width: 70%;
+  background: green;
+  padding: 18px;
+}
+
+.search {
+  margin: 0;
+  padding: 4px 9px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background: red;
+  margin-bottom: 18px;
+}
+
+.search__control {
+  width: 20%;
+  text-align: center;
+}
+
+.search__button {
+  width: 10%;
+}
+
+.results {
+  margin: 0;
+  padding: 0;
+  background: yellow;
+  width: 100%;
+}
+
