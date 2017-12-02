@@ -8,10 +8,6 @@ use Hash;
 
 class AuthController extends Controller
 {
-    public function __construct() {
-        $this->middleware('auth:api')
-            ->only('logout');
-    }
 
     public function register(Request $request) {
         // Create user
@@ -56,5 +52,12 @@ class AuthController extends Controller
             ->json([
                 'email' => ['Credentials did not match']
             ], 422);
+    }
+
+    public function logout(Request $request) {
+        return response()
+            ->json([
+                'logged_out'=>true
+            ]);
     }
 }
