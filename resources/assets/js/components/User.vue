@@ -7,7 +7,7 @@
                 <input class="search__control" type="text" placeholder="First Name" v-model="form.first_name">
                 <input class="search__control" type="text" placeholder="Last Name" v-model="form.last_name">
                 <select class="search__control" v-model="form.sort_by">
-                    <option value="" disabled></option>
+                    <option value=""></option>
                     <option value="ASC">Ascending</option>
                     <option value="DESC">Descending</option>
                 </select>
@@ -19,12 +19,16 @@
                     <td>First Name</td>
                     <td>Last Name</td>
                     <td>Address</td>
+                    <td></td>
                 </tr>
                 <tr v-for="user in users">
                     <td>{{user.USER_ID}}</td>
                     <td>{{user.FIRST_NAME}}</td>
                     <td>{{user.LAST_NAME}}</td>
                     <td>{{user.ADDRESS}}</td>
+                    <router-link :to="{ path: '/accounts/' + user.USER_ID}" tag="td">
+                        <a>Accounts</a>
+                    </router-link>
                 </tr>
                 <tr v-if="noUser">
                     <td>User Not Found</td>

@@ -1,3 +1,5 @@
-<?php
+<?php 
 
-Route::post('/users', 'UserController@index');
+// Users API
+Route::post('/register', 'AuthController@register');
+Route::post('/login', 'AuthController@login');
