@@ -19,10 +19,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <router-link to="/accounts" tag="li" class="text-center">
-                        <a v-if="check">Accounts</a>
+                        <a v-if="check && !isAdmin">Accounts</a>
                     </router-link>
                     <router-link to="/transactions" tag="li" class="text-center">
-                        <a v-if="check">Transactions</a>
+                        <a v-if="check && !isAdmin">Transactions</a>
                     </router-link>
                     <router-link to="/login" tag="li" class="text-center">
                         <a v-if="!check" class="active">Login</a>
@@ -30,8 +30,11 @@
                     <router-link to="/register" tag="li" class="text-center">
                         <a v-if="!check">Register</a>
                     </router-link>
+                    <router-link to="/admin" tag="li" class="text-center">
+                        <a v-if="isAdmin">Admin</a>
+                    </router-link>
                     <li class="text-center">
-                        <a v-if="check" @click.stop="logout">Logout</a>
+                        <a v-if="check" @click.stop="logout" style="cursor:pointer;">Logout</a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -64,6 +67,9 @@
         computed: {
             check() {
                 return this.auth.api_token && this.auth.user_id;
+            },
+            isAdmin() {
+                return this.auth.api_token && this.auth.is_admin != 'null';
             }
         },
         methods: {

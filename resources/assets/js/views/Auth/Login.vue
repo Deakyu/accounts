@@ -56,9 +56,14 @@
                 post('/api/login', this.form)
                     .then((res) => {
                         if(res.data.authenticated) {
-                            Auth.set(res.data.api_token, res.data.user_id);
-                            Flash.setSuccess('Logged In');
-                            this.$router.push({path:"/accounts"});
+                            Auth.set(res.data.api_token, res.data.user_id, res.data.is_admin);
+                            if (Auth.state.is_admin == 'null') {
+                                Flash.setSuccess('Logged In');
+                                this.$router.push({path:"/accounts"});
+                            } else {
+                                Flash.setSuccess('Logged in as Administrator');
+                                this.$router.push({path: '/admin'});
+                            }
                         }
                         this.isProcessing = false;
                     })

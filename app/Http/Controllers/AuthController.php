@@ -40,11 +40,13 @@ class AuthController extends Controller
     public function login(Request $request) {
         $user = DB::select('SELECT * FROM users WHERE email=?', [$request->email]);
         if($user && Hash::check($request->password, $user[0]->PASSWORD)) {
+            $isAdmin = $user[0]->EMAIL == 'lee5250@fredonia.edu' ? 1 : null;
             return response()
                 ->json([
                     'authenticated' => true,
                     'api_token' => str_random(60),
                     'user_id' => $user[0]->USER_ID,
+                    'is_admin' => $isAdmin,
                 ]);
         }
 
