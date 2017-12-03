@@ -484,6 +484,47 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 /* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export get */
+/* harmony export (immutable) */ __webpack_exports__["a"] = post;
+/* unused harmony export del */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Auth_auth__ = __webpack_require__(4);
+
+
+function get(url) {
+    return axios({
+        method: 'get',
+        url: url,
+        headers: {
+            'Authorization': 'Bearer ' + __WEBPACK_IMPORTED_MODULE_0__Auth_auth__["a" /* default */].state.api_token
+        }
+    });
+};
+function post(url, data) {
+    return axios({
+        method: 'post',
+        url: url,
+        data: data,
+        headers: {
+            'Authorization': 'Bearer ' + __WEBPACK_IMPORTED_MODULE_0__Auth_auth__["a" /* default */].state.api_token
+        }
+    });
+}
+
+function del(url) {
+    return axios({
+        method: 'delete',
+        url: url,
+        headers: {
+            'Authorization': 'Bearer ' + __WEBPACK_IMPORTED_MODULE_0__Auth_auth__["a" /* default */].state.api_token
+        }
+    });
+}
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -583,7 +624,7 @@ module.exports = defaults;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -613,7 +654,7 @@ module.exports = defaults;
 });
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -645,47 +686,6 @@ module.exports = defaults;
         this.state.error = null;
     }
 });
-
-/***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export get */
-/* harmony export (immutable) */ __webpack_exports__["a"] = post;
-/* unused harmony export del */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Auth_auth__ = __webpack_require__(3);
-
-
-function get(url) {
-    return axios({
-        method: 'get',
-        url: url,
-        headers: {
-            'Authorization': 'Bearer ' + __WEBPACK_IMPORTED_MODULE_0__Auth_auth__["a" /* default */].state.api_token
-        }
-    });
-};
-function post(url, data) {
-    return axios({
-        method: 'post',
-        url: url,
-        data: data,
-        headers: {
-            'Authorization': 'Bearer ' + __WEBPACK_IMPORTED_MODULE_0__Auth_auth__["a" /* default */].state.api_token
-        }
-    });
-}
-
-function del(url) {
-    return axios({
-        method: 'delete',
-        url: url,
-        headers: {
-            'Authorization': 'Bearer ' + __WEBPACK_IMPORTED_MODULE_0__Auth_auth__["a" /* default */].state.api_token
-        }
-    });
-}
 
 /***/ }),
 /* 6 */
@@ -14506,7 +14506,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(16);
-module.exports = __webpack_require__(58);
+module.exports = __webpack_require__(61);
 
 
 /***/ }),
@@ -14827,7 +14827,7 @@ module.exports = __webpack_require__(21);
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(10);
 var Axios = __webpack_require__(23);
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 
 /**
  * Create an instance of Axios
@@ -14910,7 +14910,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(32);
 var dispatchRequest = __webpack_require__(33);
@@ -15442,7 +15442,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(34);
 var isCancel = __webpack_require__(13);
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -15739,9 +15739,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Auth_auth__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_flash__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_api__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Auth_auth__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_flash__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_api__ = __webpack_require__(2);
 //
 //
 //
@@ -16038,9 +16038,9 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_Account_Account_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__views_Account_Account_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_Account_Transaction_vue__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_Account_Transaction_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__views_Account_Transaction_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_Admin_vue__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_Admin_vue__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_Admin_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__views_Admin_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_Landing_vue__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_Landing_vue__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_Landing_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__views_Landing_vue__);
 
 
@@ -16113,8 +16113,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_flash__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_api__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_flash__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_api__ = __webpack_require__(2);
 //
 //
 //
@@ -16465,9 +16465,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_api__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_flash__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Auth_auth__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_api__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_flash__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Auth_auth__ = __webpack_require__(4);
 //
 //
 //
@@ -16894,105 +16894,6 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\Landing.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-71345c1a", Component.options)
-  } else {
-    hotAPI.reload("data-v-71345c1a", Component.options)
-' + '  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 56 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    created: function created() {},
-    data: function data() {
-        return {};
-    },
-
-    methods: {},
-    mounted: function mounted() {}
-});
-
-/***/ }),
-/* 57 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Landing")])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-71345c1a", module.exports)
-  }
-}
-
-/***/ }),
-/* 58 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 59 */,
-/* 60 */,
-/* 61 */,
-/* 62 */,
-/* 63 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(64)
-/* template */
-var __vue_template__ = __webpack_require__(65)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
 Component.options.__file = "resources\\assets\\js\\views\\Admin.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
@@ -17016,12 +16917,62 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 64 */
+/* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_api__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_api__ = __webpack_require__(2);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -17132,9 +17083,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 transactions: ["transaction_id", "type", "amount", "date", "source", "destination"]
             },
             checkedFields: {
-                users: ["user_id", "email", "first_name", "last_name", "address"],
-                accounts: ["account_id", "user_id", "balance", "date_created"],
-                transactions: ["transaction_id", "type", "amount", "date", "source", "destination"]
+                users: [],
+                accounts: [],
+                transactions: []
             },
             conditions: [{
                 index: 1,
@@ -17142,7 +17093,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 operator: "",
                 value: ""
             }],
-            results: []
+            results: [],
+            error: {},
+            joins: [{
+                field1: "",
+                field2: ""
+            }]
         };
     },
 
@@ -17167,9 +17123,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (table == 'transactions') has = true;
             });
             return has;
+        },
+        keys: function keys() {
+            if (this.results.length > 0) {
+                return Object.keys(this.results[0]);
+            }
         }
     },
     methods: {
+        addJoin: function addJoin() {
+            this.joins.push({
+                field1: "",
+                field2: ""
+            });
+        },
+        removeJoin: function removeJoin() {
+            this.joins.pop();
+        },
         addCondition: function addCondition() {
             this.conditions.push({
                 index: this.conditions.length + 1,
@@ -17180,12 +17150,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         removeCondition: function removeCondition() {
             this.conditions.pop();
+        },
+        clear: function clear() {
+            this.tables = [];
+            this.checkedFields = {
+                users: [],
+                accounts: [],
+                transactions: []
+            };
+            this.conditions = [{
+                index: 1,
+                field: "",
+                operator: "",
+                value: ""
+            }];
+            this.results = [];
+        },
+        query: function query() {
+            var _this = this;
+
+            this.error = {};
+            var data = {
+                tables: this.tables,
+                fields: this.checkedFields,
+                conditions: this.conditions,
+                joins: this.joins
+            };
+            Object(__WEBPACK_IMPORTED_MODULE_0__helpers_api__["a" /* post */])('/api/query', data).then(function (res) {
+                console.log(res.data);
+                _this.results = res.data.results;
+                setTimeout(function () {
+                    document.querySelector('.table.table-striped').scrollIntoView(true);
+                }, 50);
+            }).catch(function (err) {
+                _this.clear();
+                _this.error = err.response.data;
+            });
         }
     }
 });
 
 /***/ }),
-/* 65 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -17224,6 +17230,14 @@ var render = function() {
                       },
                       [_vm._v("Tables")]
                     ),
+                    _vm._v(" "),
+                    _c("div", { attrs: { align: "center" } }, [
+                      _vm.error.bad_query
+                        ? _c("small", { staticClass: "error-control" }, [
+                            _vm._v(_vm._s(_vm.error.bad_query[0]))
+                          ])
+                        : _vm._e()
+                    ]),
                     _vm._v(" "),
                     _c("label", { staticClass: "checkbox-inline" }, [
                       _c("input", {
@@ -17394,13 +17408,13 @@ var render = function() {
                                     ],
                                     attrs: { type: "checkbox" },
                                     domProps: {
-                                      value: field,
+                                      value: "users." + field,
                                       checked: Array.isArray(
                                         _vm.checkedFields.users
                                       )
                                         ? _vm._i(
                                             _vm.checkedFields.users,
-                                            field
+                                            "users." + field
                                           ) > -1
                                         : _vm.checkedFields.users
                                     },
@@ -17410,7 +17424,7 @@ var render = function() {
                                           $$el = $event.target,
                                           $$c = $$el.checked ? true : false
                                         if (Array.isArray($$a)) {
-                                          var $$v = field,
+                                          var $$v = "users." + field,
                                             $$i = _vm._i($$a, $$v)
                                           if ($$el.checked) {
                                             $$i < 0 &&
@@ -17478,13 +17492,13 @@ var render = function() {
                                     ],
                                     attrs: { type: "checkbox" },
                                     domProps: {
-                                      value: field,
+                                      value: "accounts." + field,
                                       checked: Array.isArray(
                                         _vm.checkedFields.accounts
                                       )
                                         ? _vm._i(
                                             _vm.checkedFields.accounts,
-                                            field
+                                            "accounts." + field
                                           ) > -1
                                         : _vm.checkedFields.accounts
                                     },
@@ -17494,7 +17508,7 @@ var render = function() {
                                           $$el = $event.target,
                                           $$c = $$el.checked ? true : false
                                         if (Array.isArray($$a)) {
-                                          var $$v = field,
+                                          var $$v = "accounts." + field,
                                             $$i = _vm._i($$a, $$v)
                                           if ($$el.checked) {
                                             $$i < 0 &&
@@ -17562,13 +17576,13 @@ var render = function() {
                                     ],
                                     attrs: { type: "checkbox" },
                                     domProps: {
-                                      value: field,
+                                      value: "transactions." + field,
                                       checked: Array.isArray(
                                         _vm.checkedFields.transactions
                                       )
                                         ? _vm._i(
                                             _vm.checkedFields.transactions,
-                                            field
+                                            "transactions." + field
                                           ) > -1
                                         : _vm.checkedFields.transactions
                                     },
@@ -17579,7 +17593,7 @@ var render = function() {
                                           $$el = $event.target,
                                           $$c = $$el.checked ? true : false
                                         if (Array.isArray($$a)) {
-                                          var $$v = field,
+                                          var $$v = "transactions." + field,
                                             $$i = _vm._i($$a, $$v)
                                           if ($$el.checked) {
                                             $$i < 0 &&
@@ -17617,6 +17631,186 @@ var render = function() {
                     ])
                   : _vm._e()
               ]),
+              _vm._v(" "),
+              _vm._l(_vm.joins, function(join) {
+                return _c("div", { staticClass: "row" }, [
+                  _c(
+                    "h3",
+                    {
+                      staticClass: "h3 text-center",
+                      staticStyle: { "border-bottom": "1px solid #ccc" }
+                    },
+                    [_vm._v("Join on")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-md-4" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: join.field1,
+                            expression: "join.field1"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              join,
+                              "field1",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _vm._l(_vm.fields.users, function(field) {
+                          return _c(
+                            "option",
+                            { domProps: { value: "users." + field } },
+                            [_vm._v("(Users) " + _vm._s(field))]
+                          )
+                        }),
+                        _vm._v(" "),
+                        _vm._l(_vm.fields.accounts, function(field) {
+                          return _c(
+                            "option",
+                            { domProps: { value: "accounts." + field } },
+                            [_vm._v("(Accounts) " + _vm._s(field))]
+                          )
+                        }),
+                        _vm._v(" "),
+                        _vm._l(_vm.fields.transactions, function(field) {
+                          return _c(
+                            "option",
+                            { domProps: { value: "transactions." + field } },
+                            [_vm._v("(Transactions) " + _vm._s(field))]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "col-md-2 text-center",
+                      staticStyle: { "font-size": "24px" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            =\n                        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-md-4" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: join.field2,
+                            expression: "join.field2"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              join,
+                              "field2",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _vm._l(_vm.fields.users, function(field) {
+                          return _c(
+                            "option",
+                            { domProps: { value: "users." + field } },
+                            [_vm._v("(Users) " + _vm._s(field))]
+                          )
+                        }),
+                        _vm._v(" "),
+                        _vm._l(_vm.fields.accounts, function(field) {
+                          return _c(
+                            "option",
+                            { domProps: { value: "accounts." + field } },
+                            [_vm._v("(Accounts) " + _vm._s(field))]
+                          )
+                        }),
+                        _vm._v(" "),
+                        _vm._l(_vm.fields.transactions, function(field) {
+                          return _c(
+                            "option",
+                            { domProps: { value: "transactions." + field } },
+                            [_vm._v("(Transactions) " + _vm._s(field))]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-1" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        on: { click: _vm.addJoin }
+                      },
+                      [_vm._v("+")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-1" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        on: { click: _vm.removeJoin }
+                      },
+                      [_vm._v("x")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm.error.join
+                    ? _c("div", { attrs: { align: "center" } }, [
+                        _c("small", { staticClass: "error-control" }, [
+                          _vm._v(_vm._s(_vm.error.join[0]))
+                        ])
+                      ])
+                    : _vm._e()
+                ])
+              }),
               _vm._v(" "),
               _c(
                 "div",
@@ -17680,7 +17874,7 @@ var render = function() {
                           _vm._l(_vm.fields.users, function(field) {
                             return _c(
                               "option",
-                              { domProps: { value: field } },
+                              { domProps: { value: "users." + field } },
                               [_vm._v("(Users) " + _vm._s(field))]
                             )
                           }),
@@ -17688,7 +17882,7 @@ var render = function() {
                           _vm._l(_vm.fields.accounts, function(field) {
                             return _c(
                               "option",
-                              { domProps: { value: field } },
+                              { domProps: { value: "accounts." + field } },
                               [_vm._v("(Accounts) " + _vm._s(field))]
                             )
                           }),
@@ -17696,7 +17890,7 @@ var render = function() {
                           _vm._l(_vm.fields.transactions, function(field) {
                             return _c(
                               "option",
-                              { domProps: { value: field } },
+                              { domProps: { value: "transactions." + field } },
                               [_vm._v("(Transactions) " + _vm._s(field))]
                             )
                           })
@@ -17773,6 +17967,14 @@ var render = function() {
                     ])
                   }),
                   _vm._v(" "),
+                  _vm.error.condition
+                    ? _c("div", { attrs: { align: "center" } }, [
+                        _c("small", { staticClass: "error-control" }, [
+                          _vm._v(_vm._s(_vm.error.condition[0]))
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
                   _c("div", { attrs: { align: "center" } }, [
                     _c(
                       "button",
@@ -17792,8 +17994,63 @@ var render = function() {
                 2
               ),
               _vm._v(" "),
-              _vm._m(1, false, false)
-            ]
+              _c("div", { attrs: { align: "center" } }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    staticStyle: { width: "50%" },
+                    on: { click: _vm.query }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Run\n                        "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "h1",
+                {
+                  staticClass: "h1 text-center bg-info",
+                  staticStyle: {
+                    "border-top": "1px solid #ccc",
+                    "margin-top": "18px",
+                    padding: "9px 0"
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                        Query Results\n                    "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("table", { staticClass: "table table-striped" }, [
+                _c("thead", [
+                  _c(
+                    "tr",
+                    _vm._l(_vm.keys, function(key) {
+                      return _c("th", [_vm._v(_vm._s(key))])
+                    })
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.results, function(result) {
+                    return _c(
+                      "tr",
+                      _vm._l(_vm.keys, function(key) {
+                        return _c("td", [_vm._v(_vm._s(result[key]))])
+                      })
+                    )
+                  })
+                )
+              ])
+            ],
+            2
           )
         ])
       ]),
@@ -17812,18 +18069,6 @@ var staticRenderFns = [
       { staticClass: "h1 text-center", staticStyle: { margin: "18px 0" } },
       [_c("strong", [_vm._v("Administrator")])]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { align: "center" } }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", staticStyle: { width: "50%" } },
-        [_vm._v("\n                            Run\n                        ")]
-      )
-    ])
   }
 ]
 render._withStripped = true
@@ -17834,6 +18079,101 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-a6c6efdc", module.exports)
   }
 }
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(59)
+/* template */
+var __vue_template__ = __webpack_require__(60)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\views\\Landing.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-71345c1a", Component.options)
+  } else {
+    hotAPI.reload("data-v-71345c1a", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 59 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    created: function created() {},
+    data: function data() {
+        return {};
+    },
+
+    methods: {},
+    mounted: function mounted() {}
+});
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("h1", [_vm._v("Landing")])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-71345c1a", module.exports)
+  }
+}
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
