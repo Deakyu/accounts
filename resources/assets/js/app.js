@@ -1,7 +1,11 @@
 import './bootstrap';
-import router from './routes';
+
+import App from './App.vue';
+import router from './router';
 
 const app = new Vue({
-    el: '#root',
-    router: router
+    el: '#root-1',
+    template: '<app></app>',
+    components: {App},
+    router
 });
