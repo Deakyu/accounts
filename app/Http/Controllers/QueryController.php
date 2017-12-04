@@ -122,4 +122,70 @@ class QueryController extends Controller
                 'noReturnValue'=>$noReturnValue,
             ]);
     }
+
+    public function accounts(Request $request) {
+        if($request->orderBy != '') {
+            $asc_desc = ' ' . $request->asc_desc;
+            $orderBy = ' ORDER BY ' . $request->orderBy;
+        } else {
+            $orderBy = '';
+            $asc_desc = '';
+        }
+        if($request->agg != '') {
+            $agg = $request->agg;
+            $fields = " " . $agg . " ";
+            $asc_desc = '';
+            $orderBy = '';
+            $aggregated = true;
+        } else {
+            $fields = ' * ';
+            $aggregated = false;
+        }
+
+        $accounts = DB::select('SELECT' . $fields . 'FROM accounts WHERE user_id = ?' . $orderBy . $asc_desc, [$request->user_id]);
+        foreach($accounts as $account) {
+            unset($account->USER_ID);
+        }
+
+        return response()
+            ->json([
+                'results' => $accounts,
+                'aggregated' => $aggregated,
+            ]);
+    }
+
+    public function transactions(Request $request) {
+        if($request->orderBy != '') {
+            $asc_desc = ' ' . $request->asc_desc;
+            $orderBy = ' ORDER BY ' . $request->orderBy;
+        } else {
+            $orderBy = '';
+            $asc_desc = '';
+        }
+        if($request->agg != '') {
+            $agg = $request->agg;
+            $fields = " " . $agg . " ";
+            $asc_desc = '';
+            $orderBy = '';
+            $aggregated = true;
+        } else {
+            $fields = ' t.* ';
+            $aggregated = false;
+        }
+
+        // $transactions = DB::select('SELECT' . $fields . 'FROM transactions WHERE source = ? OR destination = ?' . $orderBy . $asc_desc, [$request->user_id, $request->user_id]);
+        $transactions = DB::select("
+            SELECT {$fields}
+            FROM transactions t, users u, accounts a
+            WHERE u.user_id = a.user_id
+            AND u.user_id = ?
+            AND (t.source = a.account_id OR t.destination = a.account_id)
+            {$orderBy}{$asc_desc}", [$request->user_id]);
+
+        return response()
+            ->json([
+                'results' => $transactions,
+                'aggregated' => $aggregated,
+            ]);
+    }
 }

@@ -487,10 +487,44 @@ module.exports = function normalizeComponent (
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    state: {
+        success: null,
+        error: null
+    },
+    setSuccess: function setSuccess(message) {
+        var _this = this;
+
+        this.state.success = message;
+        setTimeout(function () {
+            _this.removeSuccess();
+        }, 3000);
+    },
+    setError: function setError(message) {
+        var _this2 = this;
+
+        this.state.error = message;
+        setTimeout(function () {
+            _this2.removeError();
+        }, 5000);
+    },
+    removeSuccess: function removeSuccess() {
+        this.state.success = null;
+    },
+    removeError: function removeError() {
+        this.state.error = null;
+    }
+});
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* unused harmony export get */
 /* harmony export (immutable) */ __webpack_exports__["a"] = post;
 /* unused harmony export del */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Auth_auth__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Auth_auth__ = __webpack_require__(5);
 
 
 function get(url) {
@@ -524,7 +558,7 @@ function del(url) {
 }
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -624,7 +658,7 @@ module.exports = defaults;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -650,40 +684,6 @@ module.exports = defaults;
         localStorage.removeItem('user_id');
         localStorage.removeItem('is_admin');
         this.initialize();
-    }
-});
-
-/***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = ({
-    state: {
-        success: null,
-        error: null
-    },
-    setSuccess: function setSuccess(message) {
-        var _this = this;
-
-        this.state.success = message;
-        setTimeout(function () {
-            _this.removeSuccess();
-        }, 3000);
-    },
-    setError: function setError(message) {
-        var _this2 = this;
-
-        this.state.error = message;
-        setTimeout(function () {
-            _this2.removeError();
-        }, 5000);
-    },
-    removeSuccess: function removeSuccess() {
-        this.state.success = null;
-    },
-    removeError: function removeError() {
-        this.state.error = null;
     }
 });
 
@@ -14827,7 +14827,7 @@ module.exports = __webpack_require__(21);
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(10);
 var Axios = __webpack_require__(23);
-var defaults = __webpack_require__(3);
+var defaults = __webpack_require__(4);
 
 /**
  * Create an instance of Axios
@@ -14910,7 +14910,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(3);
+var defaults = __webpack_require__(4);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(32);
 var dispatchRequest = __webpack_require__(33);
@@ -15442,7 +15442,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(34);
 var isCancel = __webpack_require__(13);
-var defaults = __webpack_require__(3);
+var defaults = __webpack_require__(4);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -15739,9 +15739,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Auth_auth__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_flash__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_api__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Auth_auth__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_flash__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_api__ = __webpack_require__(3);
 //
 //
 //
@@ -16113,8 +16113,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_flash__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_api__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_flash__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_api__ = __webpack_require__(3);
 //
 //
 //
@@ -16465,9 +16465,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_api__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_flash__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Auth_auth__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_api__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_flash__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Auth_auth__ = __webpack_require__(5);
 //
 //
 //
@@ -16744,6 +16744,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Auth_auth__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_flash__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_api__ = __webpack_require__(3);
 //
 //
 //
@@ -16753,15 +16756,119 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     created: function created() {},
-    date: function date() {
-        return {};
+    data: function data() {
+        return {
+            form: {
+                asc_desc: "ASC",
+                orderBy: "",
+                agg: "",
+                user_id: __WEBPACK_IMPORTED_MODULE_0__Auth_auth__["a" /* default */].state.user_id
+            },
+            results: [],
+            aggregated: false
+        };
     },
 
-    methods: {},
-    mounted: function mounted() {}
+    computed: {
+        keys: function keys() {
+            if (this.results.length > 0) {
+                return Object.keys(this.results[0]);
+            }
+        }
+    },
+    methods: {
+        accountsWithCondition: function accountsWithCondition() {
+            var _this = this;
+
+            Object(__WEBPACK_IMPORTED_MODULE_2__helpers_api__["a" /* post */])('/api/accounts', this.form).then(function (res) {
+                _this.results = res.data.results;
+                _this.aggregated = res.data.aggregated;
+            }).catch(function (err) {});
+        }
+    },
+    mounted: function mounted() {
+        var _this2 = this;
+
+        Object(__WEBPACK_IMPORTED_MODULE_2__helpers_api__["a" /* post */])('/api/accounts', this.form).then(function (res) {
+            _this2.results = res.data.results;
+        }).catch(function (err) {});
+    }
 });
 
 /***/ }),
@@ -16772,19 +16879,245 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0, false, false)
+  return _c("div", { staticClass: "container" }, [
+    _c("h1", { staticClass: "h1 text-center" }, [
+      _vm._v("\n          Accounts\n      ")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "form",
+        {
+          staticClass: "form-inline pull-right",
+          staticStyle: { background: "transparent" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", [_vm._v("Order By:")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.orderBy,
+                    expression: "form.orderBy"
+                  }
+                ],
+                staticClass: "form-control",
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.form,
+                      "orderBy",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              [
+                _c("option"),
+                _vm._v(" "),
+                _c("option", [_vm._v("account_id")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("balance")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("date_created")])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { staticClass: "radio-inline" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.asc_desc,
+                    expression: "form.asc_desc"
+                  }
+                ],
+                attrs: { type: "radio", value: "ASC" },
+                domProps: { checked: _vm._q(_vm.form.asc_desc, "ASC") },
+                on: {
+                  change: function($event) {
+                    _vm.$set(_vm.form, "asc_desc", "ASC")
+                  }
+                }
+              }),
+              _vm._v(" Ascending\n                      ")
+            ]),
+            _vm._v(" "),
+            _c("label", { staticClass: "radio-inline" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.asc_desc,
+                    expression: "form.asc_desc"
+                  }
+                ],
+                attrs: { type: "radio", value: "DESC" },
+                domProps: { checked: _vm._q(_vm.form.asc_desc, "DESC") },
+                on: {
+                  change: function($event) {
+                    _vm.$set(_vm.form, "asc_desc", "DESC")
+                  }
+                }
+              }),
+              _vm._v(" Descending\n                      ")
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "form-group",
+              staticStyle: { "margin-left": "36px" }
+            },
+            [
+              _c("label", [_vm._v("Aggregate:")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.agg,
+                      expression: "form.agg"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.form,
+                        "agg",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option"),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("max(balance)")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("max(date_created)")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("min(balance)")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("min(date_created)")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("avg(balance)")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("sum(balance)")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("count(account_id)")])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              on: { click: _vm.accountsWithCondition }
+            },
+            [_vm._v("GO")]
+          )
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "table-responsive" }, [
+          !_vm.aggregated
+            ? _c("table", { staticClass: "table table-striped" }, [
+                _vm._m(0, false, false),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.results, function(result) {
+                    return _c(
+                      "tr",
+                      _vm._l(_vm.keys, function(key) {
+                        return _c("td", { staticClass: "text-center" }, [
+                          _vm._v(
+                            "\n                                  " +
+                              _vm._s(result[key]) +
+                              "\n                              "
+                          )
+                        ])
+                      })
+                    )
+                  })
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.aggregated
+            ? _c("table", { staticClass: "table table-striped" }, [
+                _c("thead", [
+                  _c("tr", [_c("th", [_vm._v(_vm._s(_vm.keys[0]))])])
+                ]),
+                _vm._v(" "),
+                _c("tbody", [
+                  _c("tr", [
+                    _c("td", [_vm._v(_vm._s(_vm.results[0][_vm.keys[0]]))])
+                  ])
+                ])
+              ])
+            : _vm._e()
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("h1", { staticClass: "h1 text-center" }, [
-        _vm._v("\n        Accounts\n    ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" })
+    return _c("thead", [
+      _c("tr", { staticClass: "succss" }, [
+        _c("th", { staticClass: "text-center" }, [_vm._v("ACCOUNT ID")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("BALANCE")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("DATE_CREATED")])
+      ])
     ])
   }
 ]
@@ -16851,19 +17184,137 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Auth_auth__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_flash__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helpers_api__ = __webpack_require__(3);
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     created: function created() {},
-    date: function date() {
-        return {};
+    data: function data() {
+        return {
+            form: {
+                asc_desc: "ASC",
+                orderBy: "",
+                agg: "",
+                user_id: __WEBPACK_IMPORTED_MODULE_0__Auth_auth__["a" /* default */].state.user_id
+            },
+            results: [],
+            aggregated: false
+        };
     },
 
-    methods: {},
-    mounted: function mounted() {}
+    computed: {
+        keys: function keys() {
+            if (this.results.length > 0) {
+                return Object.keys(this.results[0]);
+            }
+        }
+    },
+    methods: {
+        transactionsWithCondition: function transactionsWithCondition() {
+            var _this = this;
+
+            Object(__WEBPACK_IMPORTED_MODULE_2__helpers_api__["a" /* post */])('/api/transactions', this.form).then(function (res) {
+                _this.results = res.data.results;
+                _this.aggregated = res.data.aggregated;
+            }).catch(function (err) {});
+        }
+    },
+    mounted: function mounted() {
+        var _this2 = this;
+
+        Object(__WEBPACK_IMPORTED_MODULE_2__helpers_api__["a" /* post */])('/api/transactions', this.form).then(function (res) {
+            _this2.results = res.data.results;
+        }).catch(function (err) {});
+    }
 });
 
 /***/ }),
@@ -16874,9 +17325,278 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Transaction")])
+  return _c("div", { staticClass: "container" }, [
+    _c("h1", { staticClass: "h1 text-center" }, [
+      _vm._v("\n          Transactions\n      ")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "form",
+        {
+          staticClass: "form-inline pull-right",
+          staticStyle: { background: "transparent" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", [_vm._v("Order By:")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.orderBy,
+                    expression: "form.orderBy"
+                  }
+                ],
+                staticClass: "form-control",
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.form,
+                      "orderBy",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              [
+                _c("option"),
+                _vm._v(" "),
+                _c("option", [_vm._v("transaction_id")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("type")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("amount")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("date")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("source")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("destination")])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { staticClass: "radio-inline" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.asc_desc,
+                    expression: "form.asc_desc"
+                  }
+                ],
+                attrs: { type: "radio", value: "ASC" },
+                domProps: { checked: _vm._q(_vm.form.asc_desc, "ASC") },
+                on: {
+                  change: function($event) {
+                    _vm.$set(_vm.form, "asc_desc", "ASC")
+                  }
+                }
+              }),
+              _vm._v(" Ascending\n                      ")
+            ]),
+            _vm._v(" "),
+            _c("label", { staticClass: "radio-inline" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.asc_desc,
+                    expression: "form.asc_desc"
+                  }
+                ],
+                attrs: { type: "radio", value: "DESC" },
+                domProps: { checked: _vm._q(_vm.form.asc_desc, "DESC") },
+                on: {
+                  change: function($event) {
+                    _vm.$set(_vm.form, "asc_desc", "DESC")
+                  }
+                }
+              }),
+              _vm._v(" Descending\n                      ")
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "form-group",
+              staticStyle: { "margin-left": "36px" }
+            },
+            [
+              _c("label", [_vm._v("Aggregate:")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.agg,
+                      expression: "form.agg"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.form,
+                        "agg",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option"),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "max(t.amount)" } }, [
+                    _vm._v("max(amount)")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "max(t.date)" } }, [
+                    _vm._v("max(date)")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "min(t.amount)" } }, [
+                    _vm._v("min(amount)")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "min(t.date)" } }, [
+                    _vm._v("min(date)")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "avg(t.amount)" } }, [
+                    _vm._v("avg(amount)")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "sum(t.amount)" } }, [
+                    _vm._v("sum(amount)")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "option",
+                    { attrs: { value: "count(t.transaction_id)" } },
+                    [_vm._v("count(transaction_id)")]
+                  )
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              on: { click: _vm.transactionsWithCondition }
+            },
+            [_vm._v("GO")]
+          )
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "table-responsive" }, [
+          !_vm.aggregated
+            ? _c("table", { staticClass: "table table-striped" }, [
+                _vm._m(0, false, false),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.results, function(result) {
+                    return _c(
+                      "tr",
+                      _vm._l(_vm.keys, function(key) {
+                        return _c("td", { staticClass: "text-center" }, [
+                          _vm._v(
+                            "\n                                  " +
+                              _vm._s(result[key]) +
+                              "\n                              "
+                          )
+                        ])
+                      })
+                    )
+                  })
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.aggregated
+            ? _c("table", { staticClass: "table table-striped" }, [
+                _c("thead", [
+                  _c("tr", { staticClass: "success" }, [
+                    _c("th", [_vm._v(_vm._s(_vm.keys[0]))])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tbody", [
+                  _c("tr", [
+                    _c("td", [_vm._v(_vm._s(_vm.results[0][_vm.keys[0]]))])
+                  ])
+                ])
+              ])
+            : _vm._e()
+        ])
+      ])
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", { staticClass: "success" }, [
+        _c("th", { staticClass: "text-center" }, [_vm._v("TRANSACTION ID")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("TYPE")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("AMOUNT")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("DATE")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("FROM")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("TO")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -16940,8 +17660,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_api__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_flash__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_api__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_flash__ = __webpack_require__(2);
 //
 //
 //
