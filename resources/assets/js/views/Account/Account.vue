@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-        <h1 class="h1 text-center">
+        <h1 class="h1 text-center" style="margin-bottom:54px;">
             Accounts
         </h1>
-        <div class="row">
+        <div class="row" style="margin-bottom: 36px;">
             <form @submit.prevent class="form-inline pull-right" style="background:transparent;">
                     <div class="form-group">
                         <label>Order By:</label>
@@ -44,7 +44,7 @@
                 <div class="table-responsive">
                     <table class="table table-striped" v-if="!aggregated">
                         <thead>
-                            <tr class="succss">
+                            <tr class="success">
                                 <th class="text-center">ACCOUNT ID</th>
                                 <th class="text-center">BALANCE</th>
                                 <th class="text-center">DATE_CREATED</th>
@@ -60,7 +60,7 @@
                     </table>
                     <table class="table table-striped" v-if="aggregated">
                         <thead>
-                            <tr>
+                            <tr class="success">
                                 <th>{{keys[0]}}</th>
                             </tr>
                         </thead>

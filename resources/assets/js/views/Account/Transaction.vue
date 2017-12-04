@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-        <h1 class="h1 text-center">
+        <h1 class="h1 text-center" style="margin-bottom:54px;">
             Transactions
         </h1>
-        <div class="row">
+        <div class="row" style="margin-bottom:36px;">
             <form @submit.prevent class="form-inline pull-right" style="background:transparent;">
                     <div class="form-group">
                         <label>Order By:</label>
@@ -79,6 +79,46 @@
                 </div> <!-- Query Result -->
             </div>
         </div>
+        <div class="row" align="center">
+            <form class="form-inline" @submit.prevent 
+                  style="background:transparent;">
+                <h2 class="h2 text-center" style="margin-bottom:36px;">Transfer Money</h2>
+                <div class="form-group">
+                    <label>From</label>
+                    <select class="form-control" v-model="transfer.from">
+                        <option v-for="account in accounts">
+                            {{account.ACCOUNT_ID}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>To</label>
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Type first name..."
+                           @keyup="pullAccounts"
+                           v-model="transfer.first_name">
+                    <select class="form-control" v-model="transfer.account_id">
+                        <option v-for="account in transfer.accounts_by_first" :value="account.account_id">
+                            {{account.account_id}}: {{account.first_name}} {{account.last_name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Type:</label>
+                    <select class="form-control" v-model="transfer.type">
+                        <option value="T">Transfer</option>
+                        <option value="D">Deposit</option>
+                        <option value="W">Withdraw</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Amount:</label>
+                    <input type="number" class="form-control" v-model="transfer.amount">
+                </div>
+                <button class="btn btn-success" @click.prevent="makeTransaction">Make Transaction</button>
+            </form>
+        </div>
   </div>
 </template>
 
@@ -99,8 +139,19 @@
                     agg: "",
                     user_id: Auth.state.user_id,
                 },
+                transfer: {
+                    first_name: "",
+                    accounts_by_first: [],
+                    from: "",
+                    account_id: "",
+                    amount: "",
+                    type: "",
+                    user_id: Auth.state.user_id,
+                },
+                accounts: [],
                 results: [],
                 aggregated: false,
+                typed: false,
             };
         },
         computed: {
@@ -120,12 +171,32 @@
                     .catch((err) => {
 
                     });
+            },
+            pullAccounts() {
+                post('/api/accounts-by-name', this.transfer)
+                    .then((res) => {
+                        console.log(res.data);
+                        this.transfer.accounts_by_first = res.data.accounts;
+                    })
+                    .catch((err) => {
+
+                    });
+            },
+            makeTransaction() {
+                post('/api/make-transaction', this.transfer)
+                    .then((res) => {
+                        Flash.setSuccess(res.data.message);
+                    })
+                    .catch((err) => {
+                        Flash.setError(err.response.data.message);
+                    });
             }
         },
         mounted() {
             post('/api/transactions', this.form)
                 .then((res) => {
                     this.results = res.data.results;
+                    this.accounts = res.data.accounts;
                 })
                 .catch((err) => {
 

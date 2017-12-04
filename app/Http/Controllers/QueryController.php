@@ -182,10 +182,47 @@ class QueryController extends Controller
             AND (t.source = a.account_id OR t.destination = a.account_id)
             {$orderBy}{$asc_desc}", [$request->user_id]);
 
+        $accounts = DB::select("
+            SELECT * FROM accounts WHERE user_id = ?
+        ", [$request->user_id]);
+
         return response()
             ->json([
+                'accounts' => $accounts,
                 'results' => $transactions,
                 'aggregated' => $aggregated,
             ]);
+    }
+
+    public function accountsByFirstName(Request $request) {
+        $accounts = DB::select('
+            SELECT a.account_id, u.first_name, u.last_name
+            FROM accounts a, users u
+            WHERE a.user_id = u.user_id
+            AND u.first_name LIKE ?
+        ', ["%" . $request->first_name . "%"]);
+
+        return response()
+            ->json([
+                'accounts' => $accounts,
+            ]);
+    }
+    public function makeTransaction(Request $request) {
+        $from = $request->from;
+        $to = $request->account_id;
+        $amount = $request->amount;
+        $type = $request->type;
+        if(DB::insert("INSERT INTO transactions (type, amount, date, source, destination) VALUES (?, ?, ?, ?, ?)",
+            [$type, $amount, date('Y-m-d'), $from, $to])) {
+                return response()
+                    ->json([
+                        'message'=>'Transaction complete'
+                    ]);
+        } else {
+            return response()
+                ->json([
+                    'message' => 'Something went wrong'
+                ], 422);
+        }
     }
 }
