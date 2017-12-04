@@ -1,5 +1,10 @@
 <template>
-  <h1>Account</h1>
+  <div class="container">
+      <h1 class="h1 text-center">
+          Accounts
+      </h1>
+      <div class="row"></div>
+  </div>
 </template>
 
 <script>

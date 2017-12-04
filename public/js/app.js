@@ -16748,6 +16748,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     created: function created() {},
@@ -16767,9 +16772,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Account")])
+  return _vm._m(0, false, false)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("h1", { staticClass: "h1 text-center" }, [
+        _vm._v("\n        Accounts\n    ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" })
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -16923,6 +16941,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_api__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers_flash__ = __webpack_require__(5);
 //
 //
 //
@@ -17069,6 +17088,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -17098,7 +17143,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             joins: [{
                 field1: "",
                 field2: ""
-            }]
+            }],
+            raw: { statement: "" },
+            isProcessing: false
         };
     },
 
@@ -17165,11 +17212,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 value: ""
             }];
             this.results = [];
+            this.raw.statement = "";
         },
         query: function query() {
             var _this = this;
 
             this.error = {};
+            this.isProcessing = true;
             var data = {
                 tables: this.tables,
                 fields: this.checkedFields,
@@ -17179,12 +17228,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             Object(__WEBPACK_IMPORTED_MODULE_0__helpers_api__["a" /* post */])('/api/query', data).then(function (res) {
                 console.log(res.data);
                 _this.results = res.data.results;
-                setTimeout(function () {
-                    document.querySelector('.table.table-striped').scrollIntoView(true);
-                }, 50);
+                _this.isProcessing = false;
             }).catch(function (err) {
                 _this.clear();
                 _this.error = err.response.data;
+                _this.isProcessing = false;
+            });
+        },
+        rawQuery: function rawQuery() {
+            var _this2 = this;
+
+            this.results = [];
+            this.error = {};
+            this.isProcessing = true;
+            Object(__WEBPACK_IMPORTED_MODULE_0__helpers_api__["a" /* post */])('/api/raw', this.raw).then(function (res) {
+                console.log(res.data);
+                __WEBPACK_IMPORTED_MODULE_1__helpers_flash__["a" /* default */].setSuccess(res.data.message);
+                if (!res.data.noReturnValue) {
+                    _this2.results = res.data.results;
+                }
+                _this2.isProcessing = false;
+            }).catch(function (err) {
+                _this2.clear();
+                _this2.error = err.response.data;
+                _this2.isProcessing = false;
             });
         }
     }
@@ -17217,153 +17284,212 @@ var render = function() {
             [
               _vm._m(0, false, false),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c(
-                  "div",
-                  { staticClass: "checkbox", attrs: { align: "center" } },
-                  [
-                    _c(
-                      "h2",
+              _c(
+                "div",
+                {
+                  staticClass: "form-inline",
+                  staticStyle: { "text-align": "center" }
+                },
+                [
+                  _c("label", [_vm._v("Raw Statements")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
                       {
-                        staticClass: "h2 text-center",
-                        staticStyle: { "border-bottom": "1px solid #ccc" }
-                      },
-                      [_vm._v("Tables")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { attrs: { align: "center" } }, [
-                      _vm.error.bad_query
-                        ? _c("small", { staticClass: "error-control" }, [
-                            _vm._v(_vm._s(_vm.error.bad_query[0]))
-                          ])
-                        : _vm._e()
-                    ]),
-                    _vm._v(" "),
-                    _c("label", { staticClass: "checkbox-inline" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.tables,
-                            expression: "tables"
-                          }
-                        ],
-                        attrs: { type: "checkbox", value: "users" },
-                        domProps: {
-                          checked: Array.isArray(_vm.tables)
-                            ? _vm._i(_vm.tables, "users") > -1
-                            : _vm.tables
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.raw.statement,
+                        expression: "raw.statement"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Statement..." },
+                    domProps: { value: _vm.raw.statement },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.raw, "statement", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.rawQuery($event)
+                        }
+                      }
+                    },
+                    [_vm._v("Run Raw")]
+                  ),
+                  _vm._v(" "),
+                  _vm.error.rawError
+                    ? _c("div", { attrs: { align: "center" } }, [
+                        _c("small", { staticClass: "error-control" }, [
+                          _vm._v(_vm._s(_vm.error.rawError[0]))
+                        ])
+                      ])
+                    : _vm._e()
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "form-group", attrs: { id: "table-check" } },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "checkbox", attrs: { align: "center" } },
+                    [
+                      _c(
+                        "h2",
+                        {
+                          staticClass: "h2 text-center",
+                          staticStyle: { "border-bottom": "1px solid #ccc" }
                         },
-                        on: {
-                          change: function($event) {
-                            var $$a = _vm.tables,
-                              $$el = $event.target,
-                              $$c = $$el.checked ? true : false
-                            if (Array.isArray($$a)) {
-                              var $$v = "users",
-                                $$i = _vm._i($$a, $$v)
-                              if ($$el.checked) {
-                                $$i < 0 && (_vm.tables = $$a.concat([$$v]))
+                        [_vm._v("Tables")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { attrs: { align: "center" } }, [
+                        _vm.error.bad_query
+                          ? _c("small", { staticClass: "error-control" }, [
+                              _vm._v(_vm._s(_vm.error.bad_query[0]))
+                            ])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("label", { staticClass: "checkbox-inline" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.tables,
+                              expression: "tables"
+                            }
+                          ],
+                          attrs: { type: "checkbox", value: "users" },
+                          domProps: {
+                            checked: Array.isArray(_vm.tables)
+                              ? _vm._i(_vm.tables, "users") > -1
+                              : _vm.tables
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$a = _vm.tables,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = "users",
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 && (_vm.tables = $$a.concat([$$v]))
+                                } else {
+                                  $$i > -1 &&
+                                    (_vm.tables = $$a
+                                      .slice(0, $$i)
+                                      .concat($$a.slice($$i + 1)))
+                                }
                               } else {
-                                $$i > -1 &&
-                                  (_vm.tables = $$a
-                                    .slice(0, $$i)
-                                    .concat($$a.slice($$i + 1)))
+                                _vm.tables = $$c
                               }
-                            } else {
-                              _vm.tables = $$c
                             }
                           }
-                        }
-                      }),
-                      _vm._v(" User\n                            ")
-                    ]),
-                    _vm._v(" "),
-                    _c("label", { staticClass: "checkbox-inline" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.tables,
-                            expression: "tables"
-                          }
-                        ],
-                        attrs: { type: "checkbox", value: "accounts" },
-                        domProps: {
-                          checked: Array.isArray(_vm.tables)
-                            ? _vm._i(_vm.tables, "accounts") > -1
-                            : _vm.tables
-                        },
-                        on: {
-                          change: function($event) {
-                            var $$a = _vm.tables,
-                              $$el = $event.target,
-                              $$c = $$el.checked ? true : false
-                            if (Array.isArray($$a)) {
-                              var $$v = "accounts",
-                                $$i = _vm._i($$a, $$v)
-                              if ($$el.checked) {
-                                $$i < 0 && (_vm.tables = $$a.concat([$$v]))
+                        }),
+                        _vm._v(" User\n                                ")
+                      ]),
+                      _vm._v(" "),
+                      _c("label", { staticClass: "checkbox-inline" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.tables,
+                              expression: "tables"
+                            }
+                          ],
+                          attrs: { type: "checkbox", value: "accounts" },
+                          domProps: {
+                            checked: Array.isArray(_vm.tables)
+                              ? _vm._i(_vm.tables, "accounts") > -1
+                              : _vm.tables
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$a = _vm.tables,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = "accounts",
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 && (_vm.tables = $$a.concat([$$v]))
+                                } else {
+                                  $$i > -1 &&
+                                    (_vm.tables = $$a
+                                      .slice(0, $$i)
+                                      .concat($$a.slice($$i + 1)))
+                                }
                               } else {
-                                $$i > -1 &&
-                                  (_vm.tables = $$a
-                                    .slice(0, $$i)
-                                    .concat($$a.slice($$i + 1)))
+                                _vm.tables = $$c
                               }
-                            } else {
-                              _vm.tables = $$c
                             }
                           }
-                        }
-                      }),
-                      _vm._v(" Account\n                            ")
-                    ]),
-                    _vm._v(" "),
-                    _c("label", { staticClass: "checkbox-inline" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.tables,
-                            expression: "tables"
-                          }
-                        ],
-                        attrs: { type: "checkbox", value: "transactions" },
-                        domProps: {
-                          checked: Array.isArray(_vm.tables)
-                            ? _vm._i(_vm.tables, "transactions") > -1
-                            : _vm.tables
-                        },
-                        on: {
-                          change: function($event) {
-                            var $$a = _vm.tables,
-                              $$el = $event.target,
-                              $$c = $$el.checked ? true : false
-                            if (Array.isArray($$a)) {
-                              var $$v = "transactions",
-                                $$i = _vm._i($$a, $$v)
-                              if ($$el.checked) {
-                                $$i < 0 && (_vm.tables = $$a.concat([$$v]))
+                        }),
+                        _vm._v(" Account\n                                ")
+                      ]),
+                      _vm._v(" "),
+                      _c("label", { staticClass: "checkbox-inline" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.tables,
+                              expression: "tables"
+                            }
+                          ],
+                          attrs: { type: "checkbox", value: "transactions" },
+                          domProps: {
+                            checked: Array.isArray(_vm.tables)
+                              ? _vm._i(_vm.tables, "transactions") > -1
+                              : _vm.tables
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$a = _vm.tables,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = "transactions",
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 && (_vm.tables = $$a.concat([$$v]))
+                                } else {
+                                  $$i > -1 &&
+                                    (_vm.tables = $$a
+                                      .slice(0, $$i)
+                                      .concat($$a.slice($$i + 1)))
+                                }
                               } else {
-                                $$i > -1 &&
-                                  (_vm.tables = $$a
-                                    .slice(0, $$i)
-                                    .concat($$a.slice($$i + 1)))
+                                _vm.tables = $$c
                               }
-                            } else {
-                              _vm.tables = $$c
                             }
                           }
-                        }
-                      }),
-                      _vm._v(" Transaction\n                            ")
-                    ])
-                  ]
-                )
-              ]),
+                        }),
+                        _vm._v(" Transaction\n                                ")
+                      ])
+                    ]
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
                 _c(
@@ -17450,7 +17576,7 @@ var render = function() {
                                   _vm._v(
                                     " " +
                                       _vm._s(field) +
-                                      "\n                                    "
+                                      "\n                                        "
                                   )
                                 ])
                               ]
@@ -17534,7 +17660,7 @@ var render = function() {
                                   _vm._v(
                                     " " +
                                       _vm._s(field) +
-                                      "\n                                    "
+                                      "\n                                        "
                                   )
                                 ])
                               ]
@@ -17619,7 +17745,7 @@ var render = function() {
                                   _vm._v(
                                     " " +
                                       _vm._s(field) +
-                                      "\n                                    "
+                                      "\n                                        "
                                   )
                                 ])
                               ]
@@ -17713,7 +17839,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                            =\n                        "
+                        "\n                                =\n                            "
                       )
                     ]
                   ),
@@ -17985,7 +18111,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                                Add Condition\n                            "
+                          "\n                                    Add Condition\n                                "
                         )
                       ]
                     )
@@ -18004,7 +18130,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                            Run\n                        "
+                      "\n                                Run\n                            "
                     )
                   ]
                 )
@@ -18014,40 +18140,46 @@ var render = function() {
                 "h1",
                 {
                   staticClass: "h1 text-center bg-info",
-                  staticStyle: {
-                    "border-top": "1px solid #ccc",
-                    "margin-top": "18px",
-                    padding: "9px 0"
-                  }
+                  staticStyle: { "margin-top": "18px", padding: "9px 0" }
                 },
                 [
                   _vm._v(
-                    "\n                        Query Results\n                    "
+                    "\n                            Query Results\n                        "
                   )
                 ]
               ),
               _vm._v(" "),
-              _c("table", { staticClass: "table table-striped" }, [
-                _c("thead", [
-                  _c(
-                    "tr",
-                    _vm._l(_vm.keys, function(key) {
-                      return _c("th", [_vm._v(_vm._s(key))])
-                    })
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "tbody",
-                  _vm._l(_vm.results, function(result) {
-                    return _c(
+              _c("div", { staticClass: "table-responsive" }, [
+                _c("table", { staticClass: "table table-striped" }, [
+                  _c("thead", [
+                    _c(
                       "tr",
+                      {
+                        staticClass: "success",
+                        staticStyle: { "text-transform": "uppercase" }
+                      },
                       _vm._l(_vm.keys, function(key) {
-                        return _c("td", [_vm._v(_vm._s(result[key]))])
+                        return _c("th", { staticClass: "text-center" }, [
+                          _vm._v(_vm._s(key))
+                        ])
                       })
                     )
-                  })
-                )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.results, function(result) {
+                      return _c(
+                        "tr",
+                        _vm._l(_vm.keys, function(key) {
+                          return _c("td", { staticClass: "text-center" }, [
+                            _vm._v(_vm._s(result[key]))
+                          ])
+                        })
+                      )
+                    })
+                  )
+                ])
               ])
             ],
             2

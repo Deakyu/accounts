@@ -64,7 +64,10 @@ class QueryController extends Controller
 
         if($joins != '') $joins = implode(' AND ', $joins);
 
-        $joins = $conditions == '' ? ' WHERE ' . $joins : ' AND ' . $joins;
+        // $joins = $conditions == '' ? ' WHERE ' . $joins : ' AND ' . $joins;
+        if($joins != '') {
+            $joins = $conditions == '' ? ' WHERE ' . $joins : ' AND ' . $joins;
+        }
 
         $results = DB::select('SELECT ' . $updatedFields . ' FROM ' . $tables . $conditions . $joins, $binders);
 
@@ -78,5 +81,45 @@ class QueryController extends Controller
             ]);
 
 
+    }
+
+    public function raw(Request $request) {
+        $arr = explode(' ', $request->statement);
+        $which = $arr[0];
+        $results = [];
+        $message = "";
+        $noReturnValue = true;
+        switch($which) {
+            case 'select':
+                $results = DB::select($request->statement);
+                $message = "Query Executed";
+                $noReturnValue = false;
+                break;
+            case 'insert':
+                DB::insert($request->statement);
+                $message = "Insertion Complete";
+                break;
+            case 'update':
+                DB::update($request->statement);
+                $message = "Update Complete";
+                break;
+            case 'delete':
+                DB::delete($request->statement);
+                $message = "Deletion complete";
+                break;
+            default:
+                return response()
+                    ->json([
+                        'rawError' => ["Something went wrong with the statement"]
+                    ], 422);
+                break;
+        }
+
+        return response()
+            ->json([
+                'results'=>$results,
+                'message'=>$message,
+                'noReturnValue'=>$noReturnValue,
+            ]);
     }
 }
