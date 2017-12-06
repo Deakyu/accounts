@@ -18,6 +18,9 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                    <li class="text-center">
+                        <a v-if="check">{{auth.first_name}}</a>
+                    </li>
                     <router-link to="/accounts" tag="li" class="text-center">
                         <a v-if="check && !isAdmin">Accounts</a>
                     </router-link>
@@ -61,7 +64,7 @@
         data() {
             return {
                 flash: Flash.state,
-                auth: Auth.state
+                auth: Auth.state,
             };
         },
         computed: {

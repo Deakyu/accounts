@@ -7,6 +7,7 @@ import Account from '../views/Account/Account.vue';
 import Transaction from '../views/Account/Transaction.vue';
 import Admin from '../views/Admin.vue';
 import Landing from '../views/Landing.vue';
+import Change from '../views/Auth/Change.vue';
 Vue.use(VueRouter);
 
 const router = new VueRouter({
@@ -17,6 +18,7 @@ const router = new VueRouter({
         {path: '/login', component: Login},
         {path: '/register', component: Register},
         {path: '/admin', component: Admin},
+        {path: '/change', component: Change},
     ]
 });
 

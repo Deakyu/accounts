@@ -4,6 +4,7 @@
 Route::post('/register', 'AuthController@register');
 Route::post('/login', 'AuthController@login');
 Route::post('/logout', 'AuthController@logout');
+Route::post('/change', 'AuthController@changePassword');
 
 // Queries API
 Route::post('/query', 'QueryController@index');

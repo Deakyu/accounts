@@ -56,7 +56,7 @@
                 post('/api/login', this.form)
                     .then((res) => {
                         if(res.data.authenticated) {
-                            Auth.set(res.data.api_token, res.data.user_id, res.data.is_admin);
+                            Auth.set(res.data.api_token, res.data.user_id, res.data.is_admin, res.data.first_name);
                             if (Auth.state.is_admin == 'null') {
                                 Flash.setSuccess('Logged In');
                                 this.$router.push({path:"/accounts"});
