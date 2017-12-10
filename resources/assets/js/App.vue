@@ -33,9 +33,27 @@
                     <router-link to="/register" tag="li" class="text-center">
                         <a v-if="!check">Register</a>
                     </router-link>
-                    <router-link to="/admin" tag="li" class="text-center">
+                    <!-- <router-link to="/admin" tag="li" class="text-center">
                         <a v-if="isAdmin">Admin</a>
-                    </router-link>
+                    </router-link> -->
+                    <li class="dropdown">
+                        <a v-if="isAdmin" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <router-link to="/admin" tag="li" class="text-center">
+                                <a>Query</a>
+                            </router-link>
+                            <li role="separator" class="divider"></li>
+                            <router-link to="/admin/users" tag="li" class="text-center">
+                                <a>Users</a>
+                            </router-link>
+                            <router-link to="/admin/accounts" tag="li" class="text-center">
+                                <a>Accounts</a>
+                            </router-link>
+                            <router-link to="/admin/transactions" tag="li" class="text-center">
+                                <a>Transactions</a>
+                            </router-link>
+                        </ul>
+                    </li>
                     <li class="text-center">
                         <a v-if="check" @click.stop="logout" style="cursor:pointer;">Logout</a>
                     </li>
