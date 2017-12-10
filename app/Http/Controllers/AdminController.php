@@ -155,4 +155,92 @@ class AdminController extends Controller
     }
 
     // TRANSACTIONS
+    public function transactionIndex(Request $request) {
+        $transactions = DB::select('SELECT * FROM transactions');
+        foreach($transactions as &$transaction) {
+            switch($transaction->TYPE) {
+                case 'W':
+                    $transaction->TYPE = 'Withdrawal';
+                    break;
+                case 'D':
+                    $transaction->TYPE = 'Deposit';
+                    break;
+                case 'T':
+                    $transaction->TYPE = 'Transfer';
+                    break;
+            }
+        }
+        unset($transaction);
+        return response()
+            ->json([
+                'results'=>$transactions,
+                'aggregated'=>false,
+            ]);
+    }
+    public function transactionCreate(Request $request) {
+        $isInputFull = true;
+        foreach($request->all() as $input) {
+            if($input == '' || $input == NULL) $isInputFull = false;
+        }
+        if(!$isInputFull) {
+            return response()
+                ->json([
+                    'message' => 'Some input missing'
+                ], 422);
+        }
+        $from = $request->source;
+        $to = $request->destination;
+        $amount = $request->amount;
+        $type = $request->type;
+        $originAccountBalance = DB::select('SELECT balance FROM accounts WHERE account_id=?', [$from]);
+        $destinationAccountBalance = DB::select('SELECT balance FROM accounts WHERE account_id=?', [$to]);
+
+        // Check for negative balances
+        if($type == 'W' || $type == 'T') {
+            if($originAccountBalance[0]->balance < $amount) {
+                return response()
+                    ->json([
+                        'message'=>'Insufficient balance to make the transaction'
+                    ], 422);
+            }
+        }
+        // Balance Sufficient so go ahead and update the balances
+        if($type == 'T') {
+            $success = DB::update('UPDATE accounts SET balance = ? WHERE account_id = ?', [$originAccountBalance[0]->balance - $amount, $from]);
+            $success = DB::update('UPDATE accounts SET balance = ? WHERE account_id = ?', [$destinationAccountBalance[0]->balance + $amount, $to]);
+        }else if($type == 'W') {
+            $success = DB::update('UPDATE accounts SET balance=? WHERE account_id=?', [$originAccountBalance[0]->balance - $amount, $from]);
+        }else if($type == 'D') {
+            $success = DB::update('UPDATE accounts SET balance=? WHERE account_id=?', [$originAccountBalance[0]->balance + $amount, $from]);
+        }
+        else {
+            $success = 0;
+        }
+
+
+        $created = DB::insert('INSERT INTO transactions(type, amount, date, source, destination) VALUES (?, ?, ?, ?, ?)', [
+            $type,
+            (float)$amount,
+            date('Y-m-d'),
+            (int)$from,
+            (int)$to,
+        ]);
+        return response()
+            ->json([
+                'created' => true
+            ]);
+    }
+
+    public function accountsWithUsers(Request $request) {
+        $results = DB::select('
+            SELECT a.account_id, u.email, u.first_name
+            FROM accounts a, users u
+            WHERE a.user_id = u.user_id
+        ');
+        return response()
+            ->json([
+                'results'=>$results,
+                'aggregated'=>false,
+            ]);
+    }
 }

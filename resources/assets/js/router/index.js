@@ -14,6 +14,8 @@ import UserEdit from '../views/Admin/User/Edit.vue';
 import AccountIndex from '../views/Admin/Account/Index.vue';
 import AccountCreate from '../views/Admin/Account/Create.vue';
 import AccountEdit from '../views/Admin/Account/Edit.vue';
+import TransactionIndex from '../views/Admin/Transaction/Index.vue';
+import TransactionCreate from '../views/Admin/Transaction/Create.vue';
 
 Vue.use(VueRouter);
 
@@ -31,6 +33,8 @@ const router = new VueRouter({
         {path: '/admin/accounts', component: AccountIndex},
         {path: '/admin/accounts/create', component: AccountCreate},
         {path: '/admin/accounts/edit/:id', component: AccountEdit},
+        {path: '/admin/transactions', component: TransactionIndex},
+        {path: '/admin/transactions/create', component: TransactionCreate},
         {path: '/change', component: Change},
     ]
 });
