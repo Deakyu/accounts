@@ -47,6 +47,7 @@ class AuthController extends Controller
                     'api_token' => str_random(60),
                     'user_id' => $user[0]->USER_ID,
                     'is_admin' => $isAdmin,
+                    'first_name'=>$user[0]->FIRST_NAME,
                 ]);
         }
 
@@ -60,6 +61,20 @@ class AuthController extends Controller
         return response()
             ->json([
                 'logged_out'=>true
+            ]);
+    }
+
+    public function changePassword(Request $request) {
+        $updated = DB::update('UPDATE users SET password=? WHERE user_id=?', [bcrypt($request->password), $request->user_id]);
+        if($updated) {
+            return response()
+                ->json([
+                    'changed'=>true
+                ]);
+        }
+        return response()
+            ->json([
+                'err'=>'Something wrong'
             ]);
     }
 }

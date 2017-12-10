@@ -64,7 +64,6 @@ class QueryController extends Controller
 
         if($joins != '') $joins = implode(' AND ', $joins);
 
-        // $joins = $conditions == '' ? ' WHERE ' . $joins : ' AND ' . $joins;
         if($joins != '') {
             $joins = $conditions == '' ? ' WHERE ' . $joins : ' AND ' . $joins;
         }
@@ -173,7 +172,6 @@ class QueryController extends Controller
             $aggregated = false;
         }
 
-        // $transactions = DB::select('SELECT' . $fields . 'FROM transactions WHERE source = ? OR destination = ?' . $orderBy . $asc_desc, [$request->user_id, $request->user_id]);
         $transactions = DB::select("
             SELECT {$fields}
             FROM transactions t, users u, accounts a
@@ -212,11 +210,37 @@ class QueryController extends Controller
         $to = $request->account_id;
         $amount = $request->amount;
         $type = $request->type;
+        $originAccountBalance = DB::select('SELECT balance FROM accounts WHERE account_id=?', [$from]);
+        $destinationAccountBalance = DB::select('SELECT balance FROM accounts WHERE account_id=?', [$to]);
+
+        // Check for negative balances
+        if($type == 'W' || $type == 'T') {
+            if($originAccountBalance[0]->balance < $amount) {
+                return response()
+                    ->json([
+                        'message'=>'Insufficient balance to make the transaction'
+                    ], 422);
+            }
+        }
+        // Balance Sufficient so go ahead and update the balances
+        if($type == 'T') {
+            $success = DB::update('UPDATE accounts SET balance = ? WHERE account_id = ?', [$originAccountBalance[0]->balance - $amount, $from]);
+            $success = DB::update('UPDATE accounts SET balance = ? WHERE account_id = ?', [$destinationAccountBalance[0]->balance + $amount, $to]);
+        }else if($type == 'W') {
+            $success = DB::update('UPDATE accounts SET balance=? WHERE account_id=?', [$originAccountBalance[0]->balance - $amount, $from]);
+        }else if($type == 'D') {
+            $success = DB::update('UPDATE accounts SET balance=? WHERE account_id=?', [$originAccountBalance[0]->balance + $amount, $from]);
+        }
+        else {
+            $success = 0;
+        }
+
         if(DB::insert("INSERT INTO transactions (type, amount, date, source, destination) VALUES (?, ?, ?, ?, ?)",
             [$type, $amount, date('Y-m-d'), $from, $to])) {
                 return response()
                     ->json([
-                        'message'=>'Transaction complete'
+                        'message'=>'Transaction complete',
+                        'success'=>$success,
                     ]);
         } else {
             return response()
