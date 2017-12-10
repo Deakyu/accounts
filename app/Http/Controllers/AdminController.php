@@ -72,6 +72,87 @@ class AdminController extends Controller
     }
 
     // ACCOUNTS
+    public function accountIndex(Request $request) {
+        $accounts = DB::select('SELECT * FROM accounts');
+        return response()
+            ->json([
+                'results'=>$accounts,
+                'aggregated'=>false,
+            ]);
+    }
+
+    public function accountCreate(Request $request) {
+        $userId = $request->user_id;
+        $balance = $request->balance;
+
+        $isInputFull = true;
+        foreach($request->all() as $input) {
+            if($input == '' || $input == NULL) $isInputFull = false;
+        }
+        if($balance < 0) {
+            return response()
+                ->json([
+                    'message'=>'Balance cannot be set below 0 by default'
+                ], 422);
+        }
+        if(!$isInputFull) {
+            return response()
+                ->json([
+                    'message' => 'Some input missing'
+                ], 422);
+        }
+        $created = DB::insert('INSERT INTO accounts (user_id, balance, date_created) VALUES (?, ?, ?)', [
+            (int)$userId,
+            (float)$balance,
+            date('Y-m-d')
+        ]);
+        return response()
+            ->json([
+                'created' => true
+            ]);
+    }
+    public function editAccountInfo(Request $request) {
+        $accounts = DB::select('SELECT * FROM accounts WHERE account_id=?', [$request->account_id]);
+
+        return response()
+            ->json([
+                'results' => $accounts
+            ]);
+    }
+
+    public function updateAccount(Request $request) {
+        $isInputFull = true;
+        foreach($request->all() as $input) {
+            if($input == '' || $input == NULL) $isInputFull = false;
+        }
+
+        if($isInputFull) {
+            $updated = DB::update('UPDATE accounts SET user_id = ?, balance = ? WHERE account_id = ?', [
+                (int)$request->user_id,
+                $request->balance,
+                (int)$request->account_id,
+            ]);
+            return response()
+                ->json([
+                    'updated'=>true
+                ]);
+        }
+        return response()
+            ->json([
+                'message'=>'Inputs are not valid'
+            ], 422);
+    }
+
+    public function deleteAccount(Request $request) {
+        $deleted = DB::delete('DELETE FROM accounts WHERE account_id=?', [$request->id]);
+        $accounts = DB::select('SELECT * FROM accounts');
+        return response()
+            ->json([
+                'message'=>'Account Deleted',
+                'account'=>$deleted,
+                'results'=>$accounts,
+            ]);
+    }
 
     // TRANSACTIONS
 }

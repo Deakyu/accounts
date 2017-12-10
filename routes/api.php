@@ -19,3 +19,9 @@ Route::post('/admin/users', 'AdminController@userIndex');
 Route::post('/admin/deleteUser', 'AdminController@deleteUser');
 Route::post('/admin/updateUser', 'AdminController@updateUser');
 Route::post('/admin/editUserInfo', 'AdminController@editUserInfo');
+
+Route::post('/admin/accounts', 'AdminController@accountIndex');
+Route::post('/admin/deleteAccount', 'AdminController@deleteAccount');
+Route::post('/admin/createAccount', 'AdminController@accountCreate');
+Route::post('/admin/updateAccount', 'AdminController@updateAccount');
+Route::post('/admin/editAccountInfo', 'AdminController@editAccountInfo');
