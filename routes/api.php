@@ -25,3 +25,7 @@ Route::post('/admin/deleteAccount', 'AdminController@deleteAccount');
 Route::post('/admin/createAccount', 'AdminController@accountCreate');
 Route::post('/admin/updateAccount', 'AdminController@updateAccount');
 Route::post('/admin/editAccountInfo', 'AdminController@editAccountInfo');
+
+Route::post('/admin/transactions', 'AdminController@transactionIndex');
+Route::post('/admin/createTransaction', 'AdminController@transactionCreate');
+Route::post('/admin/accountsWithUsers', 'AdminController@accountsWithUsers');
